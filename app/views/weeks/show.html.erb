@@ -1,0 +1,23 @@
+<h1><%= @week.number %></h1>
+
+<% if @week.lessons.any? %>
+  <h4>Here are the lessons for this week</h4>
+
+  <ul>
+    <% @week.lessons.each do |lesson| %>
+    <li>
+      <%= lesson.name %> |
+      <%= link_to "Edit", edit_week_lesson_path(@week, lesson) %> |
+      <%= link_to "Delete", week_lesson_path(@week, lesson), :data => {:confirm => "are you sure?", :method => "delete"} %>
+    </li>
+  <% end %>
+</ul>
+
+<% else %>
+  <p> There are no lessons for this week yet! </p>
+<% end %>
+
+<p><%= link_to "Add a lesson", new_week_lesson_path(@week) %></p>
+<p><%= link_to "Delete Week", week_path(@week), :data => {:confirm => "Are you sure?", :method => "delete"} %></p>
+
+<p><%= link_to "Return to Weeks", weeks_path %></p>

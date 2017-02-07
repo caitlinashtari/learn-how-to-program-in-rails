@@ -1,46 +1,50 @@
 class LessonsController < ApplicationController
-  def index
-    @lessons = Lesson.all
-  end
-
-  def show
-    @lesson = Lesson.find(params[:id])
-  end
 
   def new
-    @lesson = Lesson.new
+    @week = Week.find(params[:week_id])
+    @lesson = @week.lessons.new
   end
 
   def create
-    @lesson = Lesson.new(lesson_params)
+    @week = Week.find(params[:week_id])
+    @lesson = @week.lessons.new(lesson_params)
     if @lesson.save
-      redirect_to lessons_path
+      redirect_to week_path(@lesson.week)
     else
       render :new
     end
   end
 
   def edit
-    @lesson = Lesson.find(params[:id])
+    @week = Week.find(params[:week_id])
+    @lesson = @week.lessons.find(params[:id])
   end
 
   def update
-    @lesson = Lesson.find(params[:id])
+    @week = Week.find(params[:week_id])
+    @lesson = @week.lessons.find(params[:id])
     if @lesson.update(lesson_params)
-      redirect_to lessons_path
+      redirect_to week_lesson_path(@lesson.week)
     else
       render :edit
     end
   end
 
+  def show
+    @week = Week.find(params[:week_id])
+    @lesson = @week.lessons.find(params[:id])
+  end
+
+
   def destroy
-    @lesson = Lesson.find(params[:id])
+    @week = Week.find(params[:week_id])
+    @lesson = @week.lessons.find(params[:id])
     @lesson.destroy
-    redirect_to lessons_path
+    redirect_to week_path(@week)
   end
 
   private
     def lesson_params
-      params.require(:lesson).permit(:name, :content)
+      params.require(:lesson).permit(:name, :content, :number)
     end
 end

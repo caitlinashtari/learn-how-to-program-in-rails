@@ -1,3 +1,5 @@
 Rails.application.routes.draw do
-  resources :lessons
+  resources :weeks do
+    resources :lessons
+  end
 end

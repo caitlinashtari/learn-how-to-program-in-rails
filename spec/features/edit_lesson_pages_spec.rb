@@ -6,6 +6,7 @@ describe "the edit a lesson process" do
     visit lesson_path(lesson)
     click_on 'Edit'
     fill_in 'Name', :with => "Minosaur"
+    fill_in 'Number', :with => "1"
     click_on 'Update Lesson'
     expect(page).to have_content 'Minosaur'
   end
@@ -16,6 +17,7 @@ describe "the edit a lesson process" do
     click_on 'Edit'
     fill_in 'Name', :with => ''
     fill_in 'Content', :with => ''
+    fill_in 'Number', :with => ''
     click_button 'Update Lesson'
     expect(page).to have_content "Edit Lesson Please Fix your mistakes you dummy Name can't be blank Content can't be blank Name Content"
   end

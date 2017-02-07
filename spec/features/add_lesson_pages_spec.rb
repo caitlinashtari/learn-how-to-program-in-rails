@@ -6,6 +6,7 @@ describe "the add a lesson process" do
     click_link 'New Lesson'
     fill_in 'Name', :with => 'JavaScript'
     fill_in 'Content', :with => 'Learn JavaScript Dummy'
+    fill_in 'Number', :with => "1"
     click_on 'Create Lesson'
     expect(page).to have_content 'Lessons'
   end
