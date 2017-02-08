@@ -2,7 +2,11 @@
 <h4><%= @lesson.content %></h4>
 <h4><%= @lesson.number %></h4>
 
-<p><%= link_to "Next Lesson", week_lesson_path(@week, @lesson.next_lesson)%></p>
+<%if @lesson.next_lesson != nil%>
+  <p><%= link_to "Next Lesson", week_lesson_path(@week, @lesson.next_lesson)%></p>
+<%else%>
+  <p>There are no more lessons foo.</p>
+<%end%>
 
 <p><%= link_to "Return to week", week_path(@week) %></p>
 <p><%= link_to "Edit", edit_week_lesson_path(@lesson) %></p>
